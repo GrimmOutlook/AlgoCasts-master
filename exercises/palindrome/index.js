@@ -7,12 +7,19 @@
 //   palindrome("abba") === true
 //   palindrome("abcdefg") === false
 
-function palindrome(str) {
-  let reverseString = str.split('').reverse().join('');
-  console.log('reverseString: ', reverseString);
-  console.log('str: ', str);
-  return str == reverseString ? true : false;
+// function palindrome(str) {
+//   let reverseString = str.split('').reverse().join('');
+//   return str === reverseString ? true : false;
+// }
 
+// Alternative solution with every() - compare each letter at beginning to corresponding letter at end.
+
+const palindrome = (str) => {
+  // every() returns true or false for each comparison
+  return str.split('').every((char, i) => {
+    // i starts at zero automatically
+    return char === str[str.length -i -1];
+  });
 }
 
 module.exports = palindrome;
