@@ -9,49 +9,34 @@
 //   anagrams('Hi there', 'Bye there') --> False
 
 function anagrams(stringA, stringB) {
-  const aObj = {};
-  const bObj = {};
-  const aArray = stringA.split('');
-  const bArray = stringB.split('');
+  const aObj = stringToObject(stringA);
+  const bObj = stringToObject(stringB);
 
-  for(let i=0; i < aArray.length; i++){
-    if(!aObj[aArray[i]]){
-      aObj[aArray[i]] = 1;
-    }
-    else aObj[aArray[i]]++
+  if(Object.keys(aObj).length !== Object.keys(bObj).length){
+    return false;
   }
 
-  for(let j=0; j < bArray.length; j++){
-    if(!bObj[bArray[j]]){
-      bObj[bArray[j]] = 1;
-    }
-    else bObj[bArray[j]]++
-  }
-
-  let matchCount = 0;
-  for(let x=0; x < Object.keys(aObj).length; x++){
-      // how to compare aObj.s to bObj.s
-    console.log('aObj[x]: ', aObj.x);    // undefined
-
-    if(aObj[x] !== bObj[x]){
-      console.log('false');
+  for(let char in aObj){
+    if(aObj[char] !== bObj[char]){
       return false;
     }
-    matchCount++
   }
 
-  if(matchCount === Object.keys(aObj).length){
-    console.log('true');
-    return true;
+  return true;
+}
+
+function stringToObject(str){
+  const obj = {};
+  for(let char of str.replace(/[^\w]/g, '').toLowerCase()){
+    obj[char] = obj[char] + 1 || 1;
   }
-
-
+  return obj;
 }
 
 
-anagrams('liars', 'lairs');
+// anagrams('liars', 'lairs');
 // anagrams('liarsaabbccdd', 'aabbccddlairs');
 // anagrams('liarsaabbccdd', 'aabbccddppppppppppkkkkkkkkksisisi');
 
 
-// module.exports = anagrams;
+module.exports = anagrams;
