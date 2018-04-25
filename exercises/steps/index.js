@@ -17,6 +17,25 @@
 //       '### '
 //       '####'
 
-function steps(n) {}
+function steps(N) {
+  let arrayOfSteps = [];
+  const step = '#';
+
+  for(let i = N; i>= 1; i--){
+    let stepNum = step.repeat(i);
+    stepNum = stepNum.padEnd(N,' ');
+    arrayOfSteps.unshift(stepNum);
+  }
+
+  // console.log('arrayOfSteps: ', arrayOfSteps);
+
+  for(let x = 0; x < arrayOfSteps.length; x++){
+    console.log(arrayOfSteps[x]);
+    // arrayOfSteps.shift(arrayOfSteps[x]);
+  }
+
+}
+
+// steps(8);
 
 module.exports = steps;
